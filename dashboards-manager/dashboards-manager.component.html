@@ -1,0 +1,21 @@
+<div class="dashboards-manager-container">
+  <radiator-navigation class="navigation" [title]="title">
+    <div class="controls" *ngIf="userIsAuthenticated">
+      <button (click)="createDashboard()">Add</button>
+    </div>
+  </radiator-navigation>
+  <div class="dashboards-container">
+    <div class="row" *ngFor="let row of rows; let j = index">
+      <div class="slot" *ngFor="let column of columns; let i = index">
+        <div class="dashboard" *ngIf="i+columnCount*j < dashboards.length"
+             (click)="goToDashboard(dashboards[i+columnCount*j].id)">
+          <button class="typcn typcn-delete-outline delete-button" *ngIf="userIsAuthenticated"
+                  (click)="deleteDashboard(dashboards[i+columnCount*j].id, $event)"></button>
+          <div class="dashboard-name">
+            {{dashboards[i+columnCount*j].name}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
